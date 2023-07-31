@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+    }
+    .sidenav{
+        display: flex;
+    }
+
+    .button1, .button2 {
+      margin: 10px;
+    }
+
+    /* Add width to the button */
+    .dropdown-btn {
+      width: 300px;
+      padding: 10px 0;
+    }
+
+    /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+    .dropdown-container {
+      width: 300px;
+      max-height: 0;
+      overflow: hidden;
+      background-color: lightblue;
+      /* Add transition properties for a smooth effect */
+      transition: max-height 0.3s ease;
+    }
+
+    .active .dropdown-container {
+      max-height: 500px; /* Set an appropriate max height to show all links */
+    }
+
+    /* Style the icon to rotate when the dropdown is open */
+    .fa-caret-up {
+      transform: rotate(0deg);
+      transition: transform 0.3s ease;
+    }
+
+    .mySkill {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .mySkill p {
+      margin: 10px 5px 0;
+    }
+
+    progress {
+      width: 100%;
+    }
+
+    .progress-wrapper {
+      margin: 0 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidenav">
+    <div class="button1">
+      <button class="dropdown-btn">Frontend Developer 
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-container">
+        <a>
+            <div class="mySkill">
+                <p>HTML</p>
+                <p>90%</p>
+            </div>
+            <div class="progress-wrapper">
+              <progress class="progress-bar" id="file" value="90" max="100"></progress>
+            </div>
+        </a>
+        <a>
+            <div class="mySkill">
+                <p>CSS</p>
+                <p>70%</p>
+            </div>
+            <div class="progress-wrapper">
+              <progress class="progress-bar" id="file" value="70" max="100"></progress>
+            </div>
+        </a>
+        <a>
+            <div class="mySkill">
+                <p>JavaScript</p>
+                <p>50%</p>
+            </div>
+            <div class="progress-wrapper">
+              <progress class="progress-bar" id="file" value="50" max="100"></progress>
+            </div>
+        </a>
+      </div>
+    </div>
+    <div class="button2">
+      <button class="dropdown-btn">Dropdown 
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-container">
+        <a>
+            <div class="mySkill">
+                <p>HTML</p>
+                <p>90%</p>
+            </div>
+            <div class="progress-wrapper">
+              <progress class="progress-bar" id="file" value="90" max="100"></progress>
+            </div>
+        </a>
+        <a>
+            <div class="mySkill">
+                <p>CSS</p>
+                <p>70%</p>
+            </div>
+            <div class="progress-wrapper">
+              <progress class="progress-bar" id="file" value="70" max="100"></progress>
+            </div>
+        </a>
+        <a>
+            <div class="mySkill">
+                <p>JavaScript</p>
+                <p>50%</p>
+            </div>
+            <div class="progress-wrapper">
+              <progress class="progress-bar" id="file" value="50" max="100"></progress>
+            </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, saepe molestiae nisi sint, dolore asperiores accusantium corporis, laborum vero numquam officia consequuntur vitae? Expedita cumque, explicabo id hic molestiae reprehenderit!</p>
+
+  <script>
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+
+    // Function to close all dropdown containers except the one associated with the clicked button
+    function closeOtherDropdowns(clickedDropdown) {
+      for (var i = 0; i < dropdown.length; i++) {
+        if (dropdown[i] !== clickedDropdown) {
+          var otherDropdownContent = dropdown[i].nextElementSibling;
+          otherDropdownContent.style.maxHeight = "0";
+          dropdown[i].parentNode.classList.remove("active");
+          dropdown[i].querySelector("i").classList.remove("fa-caret-up");
+        }
+      }
+    }
+
+    // Function to toggle the dropdown container for the clicked button
+    function toggleDropdown() {
+      var dropdownContent = this.nextElementSibling;
+      var isOpen = dropdownContent.style.maxHeight;
+
+      closeOtherDropdowns(this);
+
+      if (!isOpen || isOpen === "0px") {
+        this.parentNode.classList.add("active");
+        dropdownContent.style.maxHeight = dropdownContent.scrollHeight + "px";
+        this.querySelector("i").classList.add("fa-caret-up");
+      } else {
+        this.parentNode.classList.remove("active");
+        dropdownContent.style.maxHeight = "0";
+        this.querySelector("i").classList.remove("fa-caret-up");
+      }
+    }
+
+    // Add event listeners to all dropdown buttons
+    for (var i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function() {
+        toggleDropdown.call(this);
+      });
+    }
+  </script>
+</body>
+</html>
